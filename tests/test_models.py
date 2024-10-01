@@ -30,29 +30,33 @@ def test_daily_mean_integers():
     # Need to use Numpy testing functions to compare arrays
     npt.assert_array_equal(daily_mean(test_input), test_result)
 
-def test_daily_max_integers():
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+        ([ [1,1], [2,2], [3,3] ], [3,3]),
+        ([ [1.0,1.0], [2.0,2.0], [3.0,3.0] ], [3.0,3.0]),
+        ([ [10,1], [2,20], [3,3] ], [10,20]),
+    ])
+    
+def test_daily_max_integers(test,expected):
     """Test that max function works for an array of positive integers."""
     from inflammation.models import daily_max
-    
-    test_input = np.array([[1,1],
-                           [2,2],
-                           [3,3]])
-    test_result = np.array([3,3])
-    
     # Assert the comparison of arrays
-    npt.assert_array_equal(daily_max(test_input),test_result)
+    npt.assert_array_equal(daily_max(test),expected)
 
-def test_daily_min_integers():
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+        ([ [1,1], [2,2], [3,3] ], [1,1]),
+        ([ [1.0,1.0], [2,2], [3,3] ], [1.0,1.0]),
+        ([ [-1,1], [2,0], [3,3] ], [-1,0]),
+    ])
+
+def test_daily_min_integers(test,expected):
     """Test that min function works for an array of positive integers"""
     from inflammation.models import daily_min
-    
-    test_input = np.array([[1,1],
-                           [2,2],
-                           [3,3]])
-    test_result = np.array([1,1])
-    
     # Assert the comparison of arrays
-    npt.assert_array_equal(daily_min(test_input),test_result)
+    npt.assert_array_equal(daily_min(test),expected)
     
 def test_daily_min_string():
     """Test for TypeError when passing strings"""
