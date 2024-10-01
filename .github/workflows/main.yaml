@@ -37,7 +37,7 @@ jobs:
 
     - name: Check style with Pylint
       run: |
-        python3 -m pylint --fail-under=0 --report=y inflammation
+        python3 -m pylint --report=y inflammation
 
     - name: Test with PyTest
       run: |
