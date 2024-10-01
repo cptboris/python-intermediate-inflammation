@@ -72,6 +72,16 @@ def test_daily_min_string():
     "test, expected, expect_raises",
     [
         (
+            'hello',
+            None,
+            TypeError,
+        ),
+        (
+            3,
+            None,
+            TypeError,
+        ),
+        (
             [[0, 0, 0], [0, 0, 0], [0, 0, 0]], 
             [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
             None
