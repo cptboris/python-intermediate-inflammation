@@ -35,10 +35,10 @@ def analyse_data(data_source):
 
     daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
 
-    graph_data = {
-        'standard deviation by day': daily_standard_deviation,
-    }
-    views.visualize(graph_data)
+    # graph_data = {
+    #     'standard deviation by day': daily_standard_deviation,
+    # }
+    # views.visualize(graph_data)
     return daily_standard_deviation
     
 
