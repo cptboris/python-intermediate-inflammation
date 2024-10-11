@@ -134,9 +134,9 @@ def test_compute_data_mock_source():
 
 
 def test_analyse_data():
-    from inflammation.compute_data import analyse_data
     from pathlib import Path
-    from inflammation.compute_data import CSVDataSource
+    from inflammation.compute_data import analyse_data
+    from inflammation.models import CSVDataSource
     
     path = Path.cwd() / "data"
     data_source = CSVDataSource(path)
@@ -156,8 +156,9 @@ def test_analyse_data():
     ([[[0, 1, 0], [0, 2, 0]], [[0, 1, 0], [0, 2, 0]]], [0, 0, 0])
     ],
     ids=['Two patients in same file', 'Two patients in different files', 'Two identical patients in two different files'])
+
 def test_compute_standard_deviation_by_day(data, expected_output):
-    from inflammation.compute_data import compute_standard_deviation_by_day
+    from inflammation.models import compute_standard_deviation_by_day
 
     result = compute_standard_deviation_by_day(data)
     npt.assert_array_almost_equal(result, expected_output)
