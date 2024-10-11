@@ -9,6 +9,17 @@ and each column represents a single day across all patients.
 
 import numpy as np
 
+class JSONDataSource:
+    def __init__(self,filename):
+        self.filename = filename
+        
+    def load_inflammation_data(self):
+        data_file_paths = glob.glob(os.path.join(self.dir_path, 'inflammation*.json'))
+        if len(data_file_paths) == 0:
+            raise ValueError(f"No inflammation JSON files found in path {self.dir_path}")
+        data = map(models.load_json, data_file_paths)
+        return list(data)
+
 
 def load_csv(filename):
     """Load a Numpy array from a CSV
