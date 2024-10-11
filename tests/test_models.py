@@ -3,6 +3,8 @@
 import numpy as np
 import numpy.testing as npt
 from unittest.mock import Mock
+import pytest
+import math
 
 def test_daily_mean_zeros():
     """Test that mean function works for an array of zeros."""
@@ -32,7 +34,6 @@ def test_daily_mean_integers():
 
 def test_compute_data_mock_source():
     from inflammation.compute_data import analyse_data
-    import math
     data_source = Mock()
     data_source.load_inflammation_data.return_value = [[[0,2,0]],
                                                        [[0,1,0]]]
@@ -57,3 +58,16 @@ def test_analyse_data():
                        0.78959769,0.64913879,1.16078544,0.42417995,0.36019114,0.80801707,
                        0.50323031,0.47574665,0.45197398,0.22070227]
     npt.assert_almost_equal(result,expected_output)
+
+@pytest.mark.parametrize('data,expected_output', [
+    ([[[0, 1, 0], [0, 2, 0]]], [0, 0, 0]),
+    ([[[0, 2, 0]], [[0, 1, 0]]], [0, math.sqrt(0.25), 0]),
+    ([[[0, 1, 0], [0, 2, 0]], [[0, 1, 0], [0, 2, 0]]], [0, 0, 0])
+    ],
+    ids=['Two patients in same file', 'Two patients in different files', 'Two identical patients in two different files'])
+def test_compute_standard_deviation_by_day(data, expected_output):
+    from inflammation.compute_data import compute_standard_deviation_by_day
+
+    result = compute_standard_deviation_by_day(data)
+    npt.assert_array_almost_equal(result, expected_output)
+
