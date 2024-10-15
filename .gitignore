@@ -13,3 +13,7 @@ venv/
 *.pyc
 *.egg-info
 .pytest_cache
+
+# Virtual environments
+venv/
+.venv/
