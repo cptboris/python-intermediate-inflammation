@@ -1,8 +1,6 @@
 """Module containing code for plotting inflammation data."""
 
 from matplotlib import pyplot as plt
-import numpy as np
-
 
 def visualize(data_dict):
     """Display plots of basic statistical properties of the inflammation data.
@@ -23,3 +21,13 @@ def visualize(data_dict):
     fig.tight_layout()
 
     plt.show()
+
+
+def visualize_daily_standard_deviation(daily_standard_deviation):
+    """Visualize the computed daily standard deviation
+    """
+    graph_data = {
+        'standard deviation by day': daily_standard_deviation,
+    }
+    views.visualize(graph_data)
+    return
