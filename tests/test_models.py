@@ -38,6 +38,6 @@ def test_daily_mean_integers():
     ([0.0, 2.0], 1.0)
 ])
 def test_daily_standard_deviation(data, expected_standard_deviation):
-    from inflammation.models import s_dev
+    from inflammation.models import daily_std_dev
     result_data = daily_std_dev(data)
     npt.assert_approx_equal(result_data, expected_standard_deviation)
