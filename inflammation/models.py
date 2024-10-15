@@ -33,12 +33,6 @@ def daily_min(data):
     return np.min(data, axis=0)
 
 
-def s_dev(data):
+def daily_std_dev(data):
     """Computes and returns standard deviation for data."""
-    mmm = np.mean(data, axis=0)
-    devs = []
-    for entry in data:
-        devs.append((entry - mmm) * (entry - mmm))
-
-    s_dev2 = sum(devs) / len(data)
-    return {'standard deviation': s_dev2}
+    return np.std(data,axis=0)
