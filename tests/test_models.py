@@ -1,5 +1,6 @@
 """Tests for statistics functions within the Model layer."""
 
+import os
 import numpy as np
 import numpy.testing as npt
 from unittest.mock import Mock
@@ -32,6 +33,18 @@ def test_daily_mean_integers():
     npt.assert_array_equal(daily_mean(test_input), test_result)
 
 
+
+@pytest.mark.parametrize('data, expected_standard_deviation', [
+    ([0, 0, 0], 0.0),
+    ([1.0, 1.0, 1.0], 0),
+    ([0.0, 2.0], 1.0)
+])
+def test_daily_standard_deviation(data, expected_standard_deviation):
+    from inflammation.models import daily_std_dev
+    result_data = daily_std_dev(data)
+    npt.assert_approx_equal(result_data, expected_standard_deviation)
+
+    
 @pytest.mark.parametrize(
     "test, expected",
     [
